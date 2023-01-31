@@ -6,7 +6,7 @@ use Slim\Factory\AppFactory;
 define("DB_HOST", "localhost");
 define("DB_NAME", "test");
 define("DB_USER", "root");
-define("DB_SENHA", "");
+define("DB_SENHA", "root@123");
 
 require __DIR__ . '/../vendor/autoload.php';
 
