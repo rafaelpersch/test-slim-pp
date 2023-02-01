@@ -2,13 +2,10 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
-
-define("DB_HOST", "localhost");
-define("DB_NAME", "test");
-define("DB_USER", "root");
-define("DB_SENHA", "root@123");
+use App\Model;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/config.php';
 
 class ConnectionDB {
    
@@ -28,6 +25,9 @@ class ConnectionDB {
 $app = AppFactory::create();
 
 $app->get('/', function (Request $request, Response $response, $args) {
+
+    //$cc = new Tarefa();
+
     $response->getBody()->write("Hello world!");
     return $response;
 });
