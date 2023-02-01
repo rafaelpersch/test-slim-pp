@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
-use App\Model;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/config.php';
@@ -26,7 +28,12 @@ $app = AppFactory::create();
 
 $app->get('/', function (Request $request, Response $response, $args) {
 
-    //$cc = new Tarefa();
+    /*$tarefa = new App\Models\Tarefa();
+    $tarefa->id = 10;
+    $tarefa->descricao = 'nome';
+    $tarefa->observacao = 'obs de boas';
+
+    var_dump($tarefa);*/
 
     $response->getBody()->write("Hello world!");
     return $response;
