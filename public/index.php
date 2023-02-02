@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Repository\TarefaRepository;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -34,6 +35,7 @@ $app->get('/', function (Request $request, Response $response, $args) {
     $tarefa->observacao = 'obs de boas';
 
     var_dump($tarefa);*/
+    //$ddd = new App\Repository\TarefaRepository();
 
     $response->getBody()->write("Hello world!");
     return $response;
