@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Repository\TarefaRepository;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -10,63 +9,27 @@ use Slim\Factory\AppFactory;
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/config.php';
 
-class ConnectionDB {
-   
-    public static $instance;
-   
-    public static function getInstance() {
-        if (!isset(self::$instance)) {
-            self::$instance = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_SENHA, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-            self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            self::$instance->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
-        }
-
-        return self::$instance;
-    }
-}
-
 $app = AppFactory::create();
 
 $app->get('/', function (Request $request, Response $response, $args) {
 
-    /*$tarefa = new App\Models\Tarefa();
+    /*$tarefa = new \App\Models\Tarefa();
     $tarefa->id = 10;
     $tarefa->descricao = 'nome';
-    $tarefa->observacao = 'obs de boas';
-
-    var_dump($tarefa);*/
-    //$ddd = new App\Repository\TarefaRepository();
+    $tarefa->observacao = 'obs de boas';*/
 
     $response->getBody()->write("Hello world!");
     return $response;
 });
 
 $app->get('/teste', function (Request $request, Response $response, $args) {
+    //$tarefa = new App\Models\Tarefa();
+    //$ddd = new App\Repository\TarefaRepository();
+    $db = \App\Tools\ConnectionDatabase::getInstance();
 
-    $db = ConnectionDB::getInstance();
+    $repo = new \App\Repository\TarefaRepository($db);
 
-    $sql = "SELECT id, name, age FROM table_teste";
-
-    $stmt = $db->prepare($sql);
-    //$stmt->bindValue(":cdrequerimento", $cdrequerimento);
-    $stmt->execute();
-
-    $lista = array();
-
-    if($stmt->rowCount() > 0){
-        $rows  = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($rows as $row) {
-            $model = array();
-            array_push($model, $row['id']);
-            array_push($model, $row['name']);
-            array_push($model, $row['age']);
-
-            array_push($lista, $model);
-        }			
-    }
-
-    $response->getBody()->write(var_dump($lista));
+    $response->getBody()->write(var_dump($repo->teste()));
 
     return $response;
 });
