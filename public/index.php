@@ -44,4 +44,7 @@ $app->get('/teste', function (Request $request, Response $response, $args) {
     return $response;
 });
 
+$app->get('/tarefa', '\App\Controllers\TarefaController:teste');
+$app->get('/tarefa/get/{id}', '\App\Controllers\TarefaController:get');
+
 $app->run();
