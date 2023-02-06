@@ -47,8 +47,8 @@ class TarefaRepository {
 	    $stmt->execute();
     }
 
-    public function select(int $id) : Tarefa {
-        $sql = "SELECT descricao, observacao FROM tarefas WHERE id = :id ";
+    public function select(int $id) : ?Tarefa {
+        $sql = "SELECT id, descricao, observacao FROM tarefas WHERE id = :id ";
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':id', $id);
@@ -73,7 +73,7 @@ class TarefaRepository {
     public function selectAll() : array {
         $lista = array();
 
-        $sql = "SELECT descricao, observacao FROM tarefas";
+        $sql = "SELECT id, descricao, observacao FROM tarefas";
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();

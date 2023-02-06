@@ -7,7 +7,7 @@ CREATE TABLE usuarios (
 );
 
 -- SELECT * FROM usuarios;
--- INSERT INTO usuarios (nome, email, senha) VALUES ('Admin', 'admin@admin.com', 'senha');
+-- INSERT INTO usuarios (nome, email, senha) VALUES ('Admin', 'admin@admin.com', 'YWRtaW5AYWRtaW4uY29tJkBkbTFu');
 -- DELETE FROM usuarios WHERE id = 4;
 
 CREATE TABLE tarefas (
