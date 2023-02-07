@@ -12,7 +12,8 @@ class TarefaController {
     private TarefaRepository $tarefaRepository;
 
     function __construct() {
-        $this->tarefaRepository = new TarefaRepository(\App\Tools\ConnectionDatabase::getInstance());
+        $db = \App\Tools\ConnectionDatabase::getInstance();
+        $this->tarefaRepository = new TarefaRepository($db);
     }    
 
     public function index(Request $request, Response $response, $args) {   
