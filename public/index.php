@@ -40,7 +40,12 @@ $app->get('/teste', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-$app->get('/tarefa', '\App\Controllers\TarefaController:teste');
-$app->get('/tarefa/get/{id}', '\App\Controllers\TarefaController:get');
+$app->get('/tarefa', '\App\Controllers\TarefaController:index');
+//$app->get('/tarefa/get/{id}', '\App\Controllers\TarefaController:delete');
+//$app->get('/tarefa/get/{id}', '\App\Controllers\TarefaController:save');
+
+//$app->get('/tarefa', '\App\Controllers\HomeController:index');
+//$app->get('/tarefa/get/{id}', '\App\Controllers\HomeController:login');
+//$app->get('/tarefa/get/{id}', '\App\Controllers\HomeController:logoff');
 
 $app->run();

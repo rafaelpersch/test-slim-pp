@@ -6,18 +6,27 @@ namespace App\Controllers;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\App;
+use App\Repository\TarefaRepository;
 
 class TarefaController {
-    public function teste(Request $request, Response $response, $args) {   
-        var_dump($args);
-        $response->getBody()->write("Hello world TEste teste!");
+    private TarefaRepository $tarefaRepository;
+
+    function __construct() {
+        $this->tarefaRepository = new TarefaRepository(\App\Tools\ConnectionDatabase::getInstance());
+    }    
+
+    public function index(Request $request, Response $response, $args) {   
+        $response->getBody()->write(json_encode($this->tarefaRepository->selectAll()));
         return $response;
     }
 
-    public function get(Request $request, Response $response, $args) {   
-        var_dump($args['id']);
-        $response->getBody()->write("Hello world TEste get!");
+    public function delete(Request $request, Response $response, $args) {   
+        $response->getBody()->write("delete!");
         return $response;
     }    
+
+    public function save(Request $request, Response $response, $args) {   
+        $response->getBody()->write("save!");
+        return $response;
+    }  
 }
