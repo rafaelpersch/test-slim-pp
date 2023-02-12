@@ -7,6 +7,7 @@ namespace App\Controllers;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Repository\TarefaRepository;
+use App\Models\Tarefa;
 use Slim\Views\Twig;
 
 class TarefaController {
@@ -27,13 +28,30 @@ class TarefaController {
         ]);
     }
 
+    public function register(Request $request, Response $response, $args) {   
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'form.html');
+    }
+
     public function delete(Request $request, Response $response, $args) {   
-        $response->getBody()->write("delete!");
-        return $response;
+        $this->tarefaRepository->delete(intval($args['id']));
+        return $response->withHeader('Location', '/tarefa/index')->withStatus(302);
     }    
 
     public function save(Request $request, Response $response, $args) {   
-        $response->getBody()->write("save!");
-        return $response;
+        $parsedBody = $request->getParsedBody();
+
+        $tarefa = new Tarefa();
+        $tarefa->id = intval($parsedBody['id']);
+        $tarefa->descricao = $parsedBody['descricao'];
+        $tarefa->observacao =  $parsedBody['observacao'];
+
+        if ($tarefa->id > 0){
+            $this->tarefaRepository->update($tarefa);
+        }else{
+            $this->tarefaRepository->insert($tarefa);
+        }
+
+        return $response->withHeader('Location', '/tarefa/index')->withStatus(302);
     }  
 }
