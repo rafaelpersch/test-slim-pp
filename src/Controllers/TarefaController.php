@@ -7,6 +7,7 @@ namespace App\Controllers;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Repository\TarefaRepository;
+use Slim\Views\Twig;
 
 class TarefaController {
     private TarefaRepository $tarefaRepository;
@@ -17,8 +18,13 @@ class TarefaController {
     }    
 
     public function index(Request $request, Response $response, $args) {   
-        $response->getBody()->write(json_encode($this->tarefaRepository->selectAll()));
-        return $response;
+        $view = Twig::fromRequest($request);
+
+        $tarefas = $this->tarefaRepository->selectAll();
+
+        return $view->render($response, 'index.html', [
+            'tarefas' => $tarefas
+        ]);
     }
 
     public function delete(Request $request, Response $response, $args) {   

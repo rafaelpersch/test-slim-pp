@@ -1,0 +1,6 @@
+<h1>Tarefas {{ tarefas|length  }}</h1>
+<ul>
+{% for tarefa in tarefas %}
+<li>{{ tarefa.descricao }}</li>
+{% endfor %}
+</ul>

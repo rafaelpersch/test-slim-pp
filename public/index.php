@@ -56,7 +56,7 @@ $app->get('/teste', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-$app->get('/tarefa', '\App\Controllers\TarefaController:index');
+$app->get('/tarefa/index', '\App\Controllers\TarefaController:index');
 //$app->get('/tarefa/get/{id}', '\App\Controllers\TarefaController:delete');
 //$app->get('/tarefa/get/{id}', '\App\Controllers\TarefaController:save');
 
