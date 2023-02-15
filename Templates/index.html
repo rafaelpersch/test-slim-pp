@@ -1,6 +1,7 @@
 <h1>Tarefas {{ tarefas|length  }}</h1>
 <ul>
 {% for tarefa in tarefas %}
-<li>{{ tarefa.id ~ ' - ' ~ tarefa.descricao }}</li>
+<li>{{ tarefa.id ~ ' - ' ~ tarefa.descricao }} <a href="/tarefa/delete/{{ tarefa.id}}">Deletar</a></li>
 {% endfor %}
 </ul>
+<a href="/tarefa/register">Novo</a>

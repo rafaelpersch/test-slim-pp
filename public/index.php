@@ -21,12 +21,12 @@ $twig = Twig::create(__DIR__ . '/../Templates');
 $app->add(TwigMiddleware::create($app, $twig));
 
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
+    return $response->withHeader('Location', '/tarefa/index')->withStatus(302);
 });
 
 $app->get('/tarefa/index', '\App\Controllers\TarefaController:index');
 $app->get('/tarefa/register', '\App\Controllers\TarefaController:register');
+$app->get('/tarefa/edit/{id}', '\App\Controllers\TarefaController:edit');
 $app->get('/tarefa/delete/{id}', '\App\Controllers\TarefaController:delete');
 $app->post('/tarefa/save', '\App\Controllers\TarefaController:save');
 

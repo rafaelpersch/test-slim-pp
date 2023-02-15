@@ -33,6 +33,20 @@ class TarefaController {
         return $view->render($response, 'form.html');
     }
 
+    public function edit(Request $request, Response $response, $args) {   
+        $tarefa = $this->tarefaRepository->select(intval($args['id']));
+
+        if ($tarefa == null){
+            return $response->withHeader('Location', '/tarefa/index')->withStatus(302);
+        }
+
+        $view = Twig::fromRequest($request);
+
+        return $view->render($response, 'form.html', [
+            'tarefa' => $tarefa
+        ]);
+    }
+
     public function delete(Request $request, Response $response, $args) {   
         $this->tarefaRepository->delete(intval($args['id']));
         return $response->withHeader('Location', '/tarefa/index')->withStatus(302);

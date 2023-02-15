@@ -1,13 +1,12 @@
 <form action="/tarefa/save" method="post">
 
-  <label>Id:</label><br>
-  <input type="text" name="id"><br>
+  <input type="hidden" name="id" value="{{ tarefa.id}}"><br>
 
     <label>Descrição:</label><br>
-    <input type="text" name="descricao"><br>
+    <input type="text" name="descricao" value="{{ tarefa.descricao }}"><br>
     
     <label>Observação:</label><br>
-    <input type="text" name="observacao"><br><br>
+    <input type="text" name="observacao" value="{{ tarefa.observacao }}"><br><br>
     
     <input type="submit" value="Submit">
   </form> 
